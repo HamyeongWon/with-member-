@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-시작합니다
+
 </body>
 </html>
