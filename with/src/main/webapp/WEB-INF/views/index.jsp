@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-시작합니다
+<a href="member/join">이동</a>
 </body>
 </html>
