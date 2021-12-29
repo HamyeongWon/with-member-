@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -33,7 +33,7 @@ function allCheck() {
 	if(cId && cPwd && cNick && cTel) {
 		return true;
 	} else {
-		alert("��Ŀ� �°� �Է����ּ���.")
+		alert("양식에 맞게 입력해주세요.")
 		return false;
 	}
 }
@@ -127,65 +127,65 @@ function allCheck() {
 		<div class="container px-4 px-lg-5 mt-5 container1 col-md-6">
 			<div class="col-md-12 mb-3" style="text-align: center">
 				<h3>
-					<b>ȸ�� ����</b>
+					<b>회원 가입</b>
 				</h3>
 			</div>
 			<div class="col-md-12 mb-3">
 				<input type="text" required id="id" name="id" class="form-control"
-					placeholder="���̵�">
-				<div class="invalid-feedback">�̸��� ������ �ƴϰų�, �ߺ��� ���̵��Դϴ�.</div>
-				<div class="valid-feedback">��� ������ ���̵��Դϴ�.</div>
+					placeholder="아이디">
+				<div class="invalid-feedback">이메일 형식이 아니거나, 중복된 아이디입니다.</div>
+				<div class="valid-feedback">사용 가능한 아이디입니다.</div>
 			</div>
 			<div class="col-md-12 mb-3">
 				<input type="password" id="pwd" required name="pwd"
-					class="form-control" placeholder="��й�ȣ">
-				<div class="invalid-feedback">��й�ȣ�� �ٸ��ϴ�.</div>
+					class="form-control" placeholder="비밀번호">
+				<div class="invalid-feedback">비밀번호가 다릅니다.</div>
 			</div>
 			<div class="col-md-12 mb-3">
 				<input type="password" id="pwd2" required class="form-control"
-					placeholder="��й�ȣ Ȯ��">
-				<div class="invalid-feedback">��й�ȣ�� �ٸ��ϴ�.</div>
+					placeholder="비밀번호 확인">
+				<div class="invalid-feedback">비밀번호가 다릅니다.</div>
 			</div>
 			<div class="col-md-12 mb-3">
 				<input type="text" id="name" required name="name"
-					class="form-control" placeholder="�̸�">
+					class="form-control" placeholder="이름">
 			</div>
 			<div class="col-md-12 mb-3">
 				<input type="text" id="nick" required name="nick"
-					class="form-control" placeholder="�г���">
-				<div class="invalid-feedback">����� �� ���� �г����Դϴ�.</div>
-				<div class="valid-feedback">��� ������ �г����Դϴ�.</div>
+					class="form-control" placeholder="닉네임">
+				<div class="invalid-feedback">사용할 수 없는 닉네임입니다.</div>
+				<div class="valid-feedback">사용 가능한 닉네임입니다.</div>
 			</div>
 			<div class="col-md-12 mb-3">
 				<input type="text" id="tel" required name="tel" class="form-control"
-					placeholder="�޴��� ��ȣ( - ����)">
-				<div class="invalid-feedback">�޴��� ��ȣ�� ��Ȯ�� �Է����ּ���(-����).</div>
+					placeholder="휴대폰 번호( - 제외)">
+				<div class="invalid-feedback">휴대폰 번호를 정확히 입력해주세요(-제외).</div>
 			</div>
 			<div class="col-md-3 mb-3">
 				<select class="form-select" id="addr" name="addr">
-					<option value="1" selected>����</option>
-					<option value="2">���</option>
-					<option value="3">��õ</option>
-					<option value="4">�λ�</option>
-					<option value="5">����</option>
-					<option value="6">����</option>
-					<option value="7">�뱸</option>
-					<option value="8">���</option>
-					<option value="9">����</option>
-					<option value="10">���</option>
-					<option value="11">�泲</option>
-					<option value="12">����</option>
-					<option value="13">����</option>
-					<option value="14">���</option>
-					<option value="15">�泲</option>
-					<option value="16">����</option>
-					<option value="17">����</option>
+					<option value="서울" selected>서울</option>
+					<option value="경기">경기</option>
+					<option value="인천">인천</option>
+					<option value="부산">부산</option>
+					<option value="대전">대전</option>
+					<option value="광주">광주</option>
+					<option value="대구">대구</option>
+					<option value="울산">울산</option>
+					<option value="강원">강원</option>
+					<option value="충북">충북</option>
+					<option value="충남">충남</option>
+					<option value="전북">전북</option>
+					<option value="전남">전남</option>
+					<option value="경북">경북</option>
+					<option value="경남">경남</option>
+					<option value="제주">제주</option>
+					<option value="세종">세종</option>
 				</select>
 			</div>
 			<input type="hidden" id="type" name="type" value="1">
 			<div class="col-md-12 mb-3">
-				<button type="submit" id="joinBtn" class="btn btn-dark">ȸ��
-					����</button>
+				<button type="submit" id="joinBtn" class="btn btn-dark">회원
+					가입</button>
 			</div>
 		</div>
 	</form>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.with.category.CategoryMapper">
+	<resultMap type="com.example.with.category.Category"
+		id="categoryResult">
+		<result property="category_num" column="category_num" />
+		<result property="category_name" column="category_name" />
+		<result property="parent_category_num"
+			column="parent_category_num" />
+	</resultMap>
+
+	<delete id="deleteC1" parameterType="int">
+		delete category1 where category1_num = #{category2_num}
+	</delete>
+
+	<delete id="deleteC2" parameterType="int">
+		delete category2 where category2_num = #{category2_num}
+	</delete>
+
+	<delete id="deleteC3" parameterType="int">
+		delete category3 where category3_num = #{category3_num}
+	</delete>
+</mapper>

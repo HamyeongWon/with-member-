@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.with.product.ProductMapper">
+   <resultMap type="com.example.with.product.Product" id="product">
+      <result property = "product_num" column = "product_num"/>
+      <result property = "product_title" column = "product_title"/>
+      <result property = "product_price" column = "product_price"/>
+      <result property = "product_content" column = "product_content"/>
+      <result property = "category_1" column = "category_1"/>
+      <result property = "category_2" column = "category_2"/>
+      <result property = "category_3" column = "category_3"/>
+      <result property = "product_type" column = "product_type"/>
+      <result property = "product_date" column = "product_date"/>
+      <result property = "product_hit" column = "product_hit"/>
+   </resultMap>   
+   
+   <insert id="insert" parameterType="com.example.with.product.Product">
+      intsert into product values(seq_product.nextval,#{product_title},#{product_price},#{product_content},
+      #{category1_num},#{category2_num},#{category3_num},0,sysdate,0)
+   </insert>
+   
+   <select id="selectListSize" resultType="int">
+      select count(*) from product
+   </select>
+   
+   <select id="select" resultType="com.example.with.product.Product">
+      select * from product where product_num = #{product_num}
+   </select>
+   
+   <select id="selectList" resultType="com.example.with.product.Product">
+      select * form product order by product_num desc
+   </select>
+   
+   <select id="selectListByLimit" resultType="com.example.with.product.Product">
+      select data. from(select rownum as num, list.* from (select * from product order by product_num desc) list) data where num between #{start} and #{last}
+   </select>
+   
+   <select id="selectListByProduct_writer" parameterType="String">
+      select * from product where product_title like '%${product_writer}%' order by product_num desc
+   </select>
+   
+   <select id="selectListByCategory1_num" resultType="com.example.with.product.Product">
+      select * from product where category1_num = #{category1_num} order by product_num desc
+   </select>
+   
+   <select id="selectListByCategory2_num" resultType="com.example.with.product.Product">
+      select * from product where category1_num = #{category2_num} order by product_num desc
+   </select>
+   
+   <select id="selectListByCategory3_num" resultType="com.example.with.product.Product">
+      select * from product where category1_num = #{category3_num} order by product_num desc
+   </select>
+   
+   <select id="selectListById" parameterType="String" resultType="com.example.with.product.Product">
+      select * from product where id = #{id} order by product_num desc
+   </select>
+   
+   <update id="update" parameterType="com.example.with.product.Product">
+      update product set product_title = #{product_title}, product_price = #{product_price}, product_content = #{product_content} where product_num = #{product_num}
+   </update>
+   
+   <update id="updateHit">
+      update product set product_hit = product_hit+1 where product_num = #{product_num}
+   </update>
+   
+   <update id="updateType">
+      update product set product_type = #{product_type} where product_num = #{product_num}
+   </update>
+   
+   <delete id="delete" parameterType="int">
+      delete from product where prodcut_num = #{product_num}
+   </delete>
+   
+   <select id="selectSeqCurrval" resultType="int">
+      select seq_product.currval from dual
+   </select>
+</mapper>

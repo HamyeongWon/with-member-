@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -27,65 +27,105 @@
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 	crossorigin="anonymous"></script>
 </head>
+<script>
+	function delMem() {
+		var result = confirm("ì •ë§ë¡œ íƒˆí‡´í•˜ì‹œê² ìŠµë‹ˆê¹Œ? ì €ì¥ëœ ì •ë³´ëŠ” ì „ë¶€ ì œê±°ë©ë‹ˆë‹¤.");
+		if (result) {
+			var f = document.f1;
+			f.method = "post";
+			f.action = "${pageContext.request.contextPath}/member/del";
+			f.submit();
+		}
+	}
+	
+	function goPwdChange() {
+		location.href="";
+	}
+</script>
 <body>
 	<c:import url="../header.jsp"></c:import>
 	<form action="${pageContext.request.contextPath }/member/update"
-		method="post">
+		method="post" name="f1">
 		<div class="container px-4 px-lg-5 mt-5 container1 col-md-6">
 			<div class="col-md-12 mb-3" style="text-align: center">
 				<h3>
-					<b>³» Á¤º¸ ¼öÁ¤</b>
+					<b>ë‚´ ì •ë³´ ìˆ˜ì •</b>
 				</h3>
 			</div>
 			<table class="table border-top border-bottom">
 				<tr class="table-light align-middle">
-					<td>¾ÆÀÌµğ</td>
+					<td>ì•„ì´ë””</td>
 					<td>${m.id }</td>
 				</tr>
 				<tr class="table-light align-middle">
-					<td>ÀÌ¸§</td>
+					<td>ë¹„ë°€ë²ˆí˜¸</td>
+					<td><button type="button" class="btn btn-outline-dark" onclick="goPwdChange()">ë¹„ë°€ë²ˆí˜¸
+							ë³€ê²½</button></td>
+				</tr>
+				<tr class="table-light align-middle">
+					<td>ì´ë¦„</td>
 					<td>${m.name }</td>
 				</tr>
 				<tr class="table-light align-middle">
-					<td>´Ğ³×ÀÓ</td>
+					<td>ë‹‰ë„¤ì„</td>
 					<td>${m.nick }</td>
 				</tr>
 				<tr class="table-light align-middle">
-					<td>ÈŞ´ëÆù ¹øÈ£</td>
+					<td>íœ´ëŒ€í° ë²ˆí˜¸</td>
 					<td><input type="text" class="form-control" name="tel"
 						value="${m.tel }"></td>
 				</tr>
 				<tr class="table-light align-middle">
-					<td>ÁÖ¼Ò</td>
+					<td>ì£¼ì†Œ</td>
 					<td style="vertical-align: middle">
 						<div class="col-md-4">
 							<select class="form-select" name="addr">
-								<option value="1" <c:if test="${m.addr == 1}">selected</c:if>>¼­¿ï</option>
-								<option value="2" <c:if test="${m.addr == 2}">selected</c:if>>°æ±â</option>
-								<option value="3" <c:if test="${m.addr == 3}">selected</c:if>>ÀÎÃµ</option>
-								<option value="4" <c:if test="${m.addr == 4}">selected</c:if>>ºÎ»ê</option>
-								<option value="5" <c:if test="${m.addr == 5}">selected</c:if>>´ëÀü</option>
-								<option value="6" <c:if test="${m.addr == 6}">selected</c:if>>±¤ÁÖ</option>
-								<option value="7" <c:if test="${m.addr == 7}">selected</c:if>>´ë±¸</option>
-								<option value="8" <c:if test="${m.addr == 8}">selected</c:if>>¿ï»ê</option>
-								<option value="9" <c:if test="${m.addr == 9}">selected</c:if>>°­¿ø</option>
-								<option value="10" <c:if test="${m.addr == 10}">selected</c:if>>ÃæºÏ</option>
-								<option value="11" <c:if test="${m.addr == 11}">selected</c:if>>Ãæ³²</option>
-								<option value="12" <c:if test="${m.addr == 12}">selected</c:if>>ÀüºÏ</option>
-								<option value="13" <c:if test="${m.addr == 13}">selected</c:if>>Àü³²</option>
-								<option value="14" <c:if test="${m.addr == 14}">selected</c:if>>°æºÏ</option>
-								<option value="15" <c:if test="${m.addr == 15}">selected</c:if>>°æ³²</option>
-								<option value="16" <c:if test="${m.addr == 16}">selected</c:if>>Á¦ÁÖ</option>
-								<option value="17" <c:if test="${m.addr == 17}">selected</c:if>>¼¼Á¾</option>
+								<option value="ì„œìš¸"
+									<c:if test="${m.addr eq 'ì„œìš¸'}">selected</c:if>>ì„œìš¸</option>
+								<option value="ê²½ê¸°"
+									<c:if test="${m.addr eq 'ê²½ê¸°'}">selected</c:if>>ê²½ê¸°</option>
+								<option value="ì¸ì²œ"
+									<c:if test="${m.addr eq 'ì¸ì²œ'}">selected</c:if>>ì¸ì²œ</option>
+								<option value="ë¶€ì‚°"
+									<c:if test="${m.addr eq 'ë¶€ì‚°'}">selected</c:if>>ë¶€ì‚°</option>
+								<option value="ëŒ€ì „"
+									<c:if test="${m.addr eq 'ëŒ€ì „'}">selected</c:if>>ëŒ€ì „</option>
+								<option value="ê´‘ì£¼"
+									<c:if test="${m.addr eq 'ê´‘ì£¼'}">selected</c:if>>ê´‘ì£¼</option>
+								<option value="ëŒ€êµ¬"
+									<c:if test="${m.addr eq 'ëŒ€êµ¬'}">selected</c:if>>ëŒ€êµ¬</option>
+								<option value="ìš¸ì‚°"
+									<c:if test="${m.addr eq 'ìš¸ì‚°'}">selected</c:if>>ìš¸ì‚°</option>
+								<option value="ê°•ì›"
+									<c:if test="${m.addr eq 'ê°•ì›'}">selected</c:if>>ê°•ì›</option>
+								<option value="ì¶©ë¶"
+									<c:if test="${m.addr eq 'ì¶©ë¶'}">selected</c:if>>ì¶©ë¶</option>
+								<option value="ì¶©ë‚¨"
+									<c:if test="${m.addr eq 'ì¶©ë‚¨'}">selected</c:if>>ì¶©ë‚¨</option>
+								<option value="ì „ë¶"
+									<c:if test="${m.addr eq 'ì „ë¶'}">selected</c:if>>ì „ë¶</option>
+								<option value="ì „ë‚¨"
+									<c:if test="${m.addr eq 'ì „ë‚¨'}">selected</c:if>>ì „ë‚¨</option>
+								<option value="ê²½ë¶"
+									<c:if test="${m.addr eq 'ê²½ë¶'}">selected</c:if>>ê²½ë¶</option>
+								<option value="ê²½ë‚¨"
+									<c:if test="${m.addr eq 'ê²½ë‚¨'}">selected</c:if>>ê²½ë‚¨</option>
+								<option value="ì œì£¼"
+									<c:if test="${m.addr eq 'ì œì£¼'}">selected</c:if>>ì œì£¼</option>
+								<option value="ì„¸ì¢…"
+									<c:if test="${m.addr eq 'ì„¸ì¢…'}">selected</c:if>>ì„¸ì¢…</option>
 							</select>
 						</div>
 					</td>
 				</tr>
 			</table>
 			<div class="col-md-12 mb-3">
-				<button type="submit" class="btn btn-dark">³» Á¤º¸ ¼öÁ¤</button>
+				<button type="submit" class="btn btn-dark">ë‚´ ì •ë³´ ìˆ˜ì •</button>
+				<button type="button" class="btn btn-danger" onclick="delMem()">íšŒì›
+					íƒˆí‡´</button>
 			</div>
 		</div>
+		<input type="hidden" name="id" value="${sessionScope.id }">
 	</form>
 	<c:import url="../footer.jsp"></c:import>
 </body>

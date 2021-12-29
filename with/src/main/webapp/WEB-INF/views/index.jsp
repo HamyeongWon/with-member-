@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -34,7 +34,6 @@ body { padding-bottom: 9% }
 <body>
 	<c:import url="header.jsp"></c:import>
 	<div class="px-2">
-		¸ŞÀÎ
 		<c:choose>
 			<c:when test="${not empty list }">
 				<c:set var="loopEnd" value=" false" />
@@ -44,16 +43,16 @@ body { padding-bottom: 9% }
 							<div class="card">
 								<img class="card-img-top" src="...">
 								<div class="card-body">
-									<h5 class="card-title">Á¦Ç° ÀÌ¸§ ${p.title }</h5>
+									<h5 class="card-title">ì œí’ˆ ì´ë¦„ ${p.title }</h5>
 									<p class="card-text">
 									<h4>
-										°¡°İ ${p.price } <span class="badge badge-secondary">ÆÇ¸ÅÁß
+										ê°€ê²© ${p.price } <span class="badge badge-secondary">íŒë§¤ì¤‘
 											${p.type }</span>
 									</h4>
 									<small style="color: gray">${p.category_1}/${p.category_2}/${p.category_3}</small>
 									</p>
 									<p class="card-text">
-										<small class="text-muted">ÀÛ¼ºÀÏ ${p.product_date }</small>
+										<small class="text-muted">ì‘ì„±ì¼ ${p.product_date }</small>
 									</p>
 								</div>
 							</div>
@@ -68,8 +67,8 @@ body { padding-bottom: 9% }
 				</c:forEach>
 			</c:when>
 			<c:otherwise>
-				µî·ÏµÈ »óÇ°ÀÌ ¾ø½À´Ï´Ù.
-				<a href="#">Ã¹ »óÇ° µî·ÏÇÏ±â</a>
+				ë“±ë¡ëœ ìƒí’ˆì´ ì—†ìŠµë‹ˆë‹¤.
+				<a href="#">ì²« ìƒí’ˆ ë“±ë¡í•˜ê¸°</a>
 
 			</c:otherwise>
 		</c:choose>

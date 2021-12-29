@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface MemberMapper {
 	void insert(Member m);
-	ArrayList<Member> select(); // 사용자 전체 목록(관리자)
+	ArrayList<Member> select();
 	Member selectById(String id);
 	int selectNick(String nick);
 	void update(Member m);

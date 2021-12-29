@@ -5,7 +5,7 @@ public class Member {
 	private String pwd;
 	private String name;
 	private String tel;
-	private int addr;
+	private String addr;
 	private String nick;
 	private int type;
 	private double rate;
@@ -14,7 +14,7 @@ public class Member {
 		super();
 	}
 
-	public Member(String id, String pwd, String name, String tel, int addr, String nick, int type, double rate) {
+	public Member(String id, String pwd, String name, String tel, String addr, String nick, int type, double rate) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
@@ -58,11 +58,11 @@ public class Member {
 		this.tel = tel;
 	}
 
-	public int getAddr() {
+	public String getAddr() {
 		return addr;
 	}
 
-	public void setAddr(int addr) {
+	public void setAddr(String addr) {
 		this.addr = addr;
 	}
 

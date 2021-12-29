@@ -20,21 +20,33 @@
 			<table>
 				<tr>
 					<td><a style="width: 100px; height: 75px"
-						href="/product/mylist" class="btn btn-outline-dark px-3 py-2 rounded-3">
-						<i class="fs-1 fas fa-gifts w-100"></i>판매 내역</a></td>
+						href="/product/mylist"
+						class="btn btn-outline-dark px-3 py-2 rounded-3"> <i
+							class="fs-1 fas fa-gifts w-100"></i>판매 내역
+					</a></td>
 					<td><a style="width: 100px; height: 75px"
-						href="/wish/wishlist" class="btn btn-outline-dark mx-3 px-3 py-2 rounded-3">
-						<i class="fs-1 fas fa-shopping w-100"></i>찜 목록</a></td>
+						href="/wish/wishlist"
+						class="btn btn-outline-dark mx-3 px-3 py-2 rounded-3"> <i
+							class="fs-1 fas fa-shopping w-100"></i>찜 목록
+					</a></td>
 					<td><a style="width: 100px; height: 75px" href="/product/add"
+						class="btn btn-outline-dark px-3 py-2 rounded-3"> <i
+							class="fs-1 fas fa-plus-square w-100"></i>상품 등록
+					</a></td>
+					<td><a style="width: 100px; height: 75px"
+						href="/review/reviewList"
 						class="btn btn-outline-dark px-3 py-2 rounded-3">
-						<i class="fs-1 fas fa-plus-square w-100"></i>상품 등록</a></td>
+						<i class="fas bi bi-chat-text" style="font-size: 36px ; width: 100%">
+						</i>
+						거래 평점
+					</a></td>
 				</tr>
 			</table>
 
 			<c:import url="${pageContext.request.contextPath }/alram/mylist"></c:import>
 			<div class="btn-group btn-group-sm mt-3" role="group">
-				<a class="btn btn-outline-secondary" href="/member/update">내 정보 수정</a> 
-				<a class="btn btn-outline-secondary" href="/member/logout">로그아웃</a>
+				<a class="btn btn-outline-secondary" href="/member/update">내 정보
+					수정</a> <a class="btn btn-outline-secondary" href="/member/logout">로그아웃</a>
 			</div>
 		</div>
 	</section>

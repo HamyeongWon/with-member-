@@ -70,6 +70,12 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/member/main";
 	}
+	
+	@RequestMapping("/member/del")
+	public String delMember(@RequestParam("id") String id) {
+		service.delMember(id);
+		return "redirect:/member/logout";
+	}
 
 	@RequestMapping("member/main")
 	public String main2() {
