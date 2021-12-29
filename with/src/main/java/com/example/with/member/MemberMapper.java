@@ -9,6 +9,7 @@ public interface MemberMapper {
 	void insert(Member m);
 	ArrayList<Member> select(); // 사용자 전체 목록(관리자)
 	Member selectById(String id);
+	int selectNick(String nick);
 	void update(Member m);
 	void delete(String id);
 	void updatePwd(String id, String pwd);

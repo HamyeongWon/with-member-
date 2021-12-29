@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,24 +19,56 @@ public class MemberController {
 	private MemberService service;
 
 	@RequestMapping("/")
-	public String main() {
-		return "index";
-	}
-	
-	@GetMapping("/member/login")
-	public String loginForm() {
-		return "member/loginForm";
+	public ModelAndView main() {
+		ModelAndView m = new ModelAndView("index");
+//		ArrayList<Product> list = productService.getList();
+//		m.addObject("list", list);
+		return m;
 	}
 
-	@RequestMapping("/idCheckService")
+	@RequestMapping("/member/idCheck")
 	@ResponseBody
-	public int idCheck(@RequestBody String id) {
+	public int idCheck(@RequestParam("id") String id) {
 		Member m = service.getMember(id);
+		int count = 0;
 		if (m == null) {
-			return 1;
+			count = 1;
 		} else {
-			return 0;
+			count = 0;
 		}
+		return count;
+	}
+
+	@RequestMapping("/member/nickCheck")
+	@ResponseBody
+	public int nickCheck(@RequestParam("nick") String nick) {
+		return service.getNick(nick);
+	}
+
+	@GetMapping("/member/login")
+	public String login() {
+		return "member/login";
+	}
+
+	@PostMapping("/member/login")
+	public String login(String id, String pwd, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Member m = service.getMember(id);
+		if (m != null && m.getPwd().equals(pwd)) {
+			session.setAttribute("id", id);
+		} else {
+			System.out.println("login fail");
+		}
+
+		return "redirect:/member/main";
+	}
+
+	@RequestMapping("/member/logout")
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		session.removeAttribute("id");
+		session.invalidate();
+		return "redirect:/member/main";
 	}
 
 	@RequestMapping("member/main")
@@ -52,19 +83,13 @@ public class MemberController {
 
 	@PostMapping("/member/join")
 	public String join(Member m, HttpServletRequest r) {
-		System.out.println("È¸¿ø°¡ÀÔ");
 		if (m != null && service.getMember(m.getId()) == null) {
-			System.out.println("È¸¿øÁ¤º¸: " + m.toString());
 			service.addMember(m);
-			// ·Î±×ÀÎ ±â´ÉÀÌ ¾ø¾î¼­ ÀÓ½Ã ±¸Çö----------------
-			HttpSession ss = r.getSession();
-			ss.setAttribute("id", m.getId());
-			// --------------------------------------
 		} else {
-			System.out.println("·Î±×ÀÎ ½ÇÆĞ");
+			System.out.println("íšŒì›ê°€ì… ì‹¤íŒ¨");
 		}
 
-		return "redirect:/member/myPage";
+		return "redirect:/member/main";
 	}
 
 	@GetMapping("member/update")
@@ -78,13 +103,12 @@ public class MemberController {
 
 	@PostMapping("member/update")
 	public String update(Member m, HttpServletRequest request) {
-		System.out.println("Á¤º¸ ¼öÁ¤");
 		HttpSession session = request.getSession(false);
 		if (m != null) {
 			m.setId((String) session.getAttribute("id"));
 			service.editMember(m);
 		} else {
-			System.out.println("Á¤º¸ ¼öÁ¤ ½ÇÆĞ");
+			System.out.println("ì •ë³´ìˆ˜ì •ì‹¤íŒ¨");
 		}
 
 		return "redirect:/member/myPage";
@@ -133,15 +157,14 @@ public class MemberController {
 		
 		if (m == null) {
 			mav.setViewName("/member/findPwd");
-			mav.addObject("error", "¾ÆÀÌµğ¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
+			mav.addObject("error", "ì•„ì´ë””(ì´ë©”ì¼)ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”..");
 		} else if (m.getId().equals(id)) {
 			mav.addObject("id", id);
 			mav.setViewName("/member/changePwd");
 		} else {
 			mav.setViewName("/member/findPwd");
-			mav.addObject("error", "ÀÔ·Â°ªÀ» È®ÀÎÇØÁÖ¼¼¿ä.");
+			mav.addObject("error", "ì…ë ¥ê°’ì„ í™•ì¸í•´ì£¼ì„¸ìš”.");
 		}
-		System.out.println(m);
 		
 		return mav;
 	}
@@ -155,6 +178,6 @@ public class MemberController {
 		System.out.println("changePwd");
 		service.editPwd(m);
 		System.out.println("changePwd2");
-		return "redirect:/member/loginForm";
+		return "redirect:/member/login";
 	}
 }

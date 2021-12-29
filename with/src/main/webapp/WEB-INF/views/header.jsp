@@ -10,13 +10,17 @@
 	function join() {
 		location.href = "${pageContext.request.contextPath }/member/join";
 	}
-	
+
 	function goMyPage() {
 		location.href = "${pageContext.request.contextPath }/member/myPage";
 	}
-	
-	function loginForm() {
+
+	function login() {
 		location.href = "${pageContext.request.contextPath }/member/login";
+	}
+
+	function logout() {
+		location.href = "${pageContext.request.contextPath }/member/logout";
 	}
 </script>
 </head>
@@ -40,17 +44,19 @@
 			<div class="col-md-3 text-end">
 				<c:choose>
 					<c:when test="${empty sessionScope.id }">
-						<button type="button" class="btn btn-outline-dark me-2" onClick="loginForm()">Login</button>
 						<button type="button" class="btn btn-dark" onClick="join()">Sign-up</button>
+						<button type="button" class="btn btn-outline-dark me-2"
+							onClick="login()">Login</button>
 					</c:when>
 					<c:otherwise>
 						<button type="button" class="btn btn-dark" onClick="goMyPage()">myPage</button>
-						<button type="button" class="btn btn-outline-dark me-2">Logout</button>
+						<button type="button" class="btn btn-outline-dark me-2"
+							onClick="logout()">Logout</button>
 					</c:otherwise>
 				</c:choose>
 			</div>
 		</header>
 	</div>
-	<hr>
+	<hr style="margin: 0">
 </body>
 </html>

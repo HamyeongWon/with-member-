@@ -17,11 +17,14 @@
 	<insert id="insert" parameterType="com.example.with.member.Member">
 		insert into member values(#{id}, #{pwd}, #{name}, #{tel}, #{addr}, #{nick}, #{type}, #{rate})
 	</insert>
-	<select id="select" resultMap="member">
+	<select id="select" resultType="com.example.with.member.Member">
 		select * from member where id = #{id}
 	</select>	
-   <select id="selectById" parameterType="String" resultMap="member">
+   <select id="selectById" parameterType="String" resultType="com.example.with.member.Member">
       select * from member where id = #{id}
+   </select>
+   <select id="selectNick" parameterType="String" resultType="int">
+   	  select count(*) from member where nick like #{nick}
    </select>
 	<update id="update" parameterType="com.example.with.member.Member">
 		update member set tel = #{tel}, addr = #{addr} where id = #{id}

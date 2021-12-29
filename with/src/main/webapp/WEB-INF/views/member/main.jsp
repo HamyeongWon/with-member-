@@ -6,8 +6,8 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>with: 메인페이지</title>
-<c:import url="../header.jsp" />
+<title>with: 마이페이지</title>
+<c:import url="../head.jsp" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/static/css/star.css" />
 </head>
@@ -19,7 +19,6 @@
 			</span>
 			<table>
 				<tr>
-
 					<td><a style="width: 100px; height: 75px"
 						href="/product/mylist" class="btn btn-outline-dark px-3 py-2 rounded-3">
 						<i class="fs-1 fas fa-gifts w-100"></i>판매 내역</a></td>
@@ -29,13 +28,12 @@
 					<td><a style="width: 100px; height: 75px" href="/product/add"
 						class="btn btn-outline-dark px-3 py-2 rounded-3">
 						<i class="fs-1 fas fa-plus-square w-100"></i>상품 등록</a></td>
-
 				</tr>
 			</table>
 
 			<c:import url="${pageContext.request.contextPath }/alram/mylist"></c:import>
-			<div class="btn-group btn-group-sm" role="group">
-				<a class="btn btn-outline-secondary" href="/member/passwordChk">내 정보 수정</a> 
+			<div class="btn-group btn-group-sm mt-3" role="group">
+				<a class="btn btn-outline-secondary" href="/member/update">내 정보 수정</a> 
 				<a class="btn btn-outline-secondary" href="/member/logout">로그아웃</a>
 			</div>
 		</div>
