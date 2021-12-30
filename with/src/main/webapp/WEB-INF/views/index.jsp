@@ -77,6 +77,14 @@ body {
 			</c:otherwise>
 		</c:choose>
 	</div>
+	<form action="${pageContext.request.contextPath }/review/reviewList">
+		<button type="submit">a@nav</button>
+		<input type="text" name="id" value="a@naver.com">
+	</form>
+	<form action="${pageContext.request.contextPath }/review/reviewList">
+		<button type="submit">b@nav</button>
+		<input type="text" name="id" value="b@naver.com">
+	</form>
 	<c:import url="footer.jsp"></c:import>
 </body>
 </html>

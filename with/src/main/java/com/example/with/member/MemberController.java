@@ -102,7 +102,7 @@ public class MemberController {
 		if (m != null && service.getMember(m.getId()) == null) {
 			service.addMember(m);
 		} else {
-			System.out.println("회원가입 실패");
+			System.out.println("join fail");
 		}
 
 		return "redirect:/member/main";
@@ -124,7 +124,7 @@ public class MemberController {
 			m.setId((String) session.getAttribute("id"));
 			service.editMember(m);
 		} else {
-			System.out.println("정보수정실패");
+			System.out.println("update fail");
 		}
 
 		return "redirect:/member/myPage";
@@ -194,9 +194,7 @@ public class MemberController {
 
 	@PostMapping(value = "/member/changePwd")
 	public String changePwd(Member m) {
-		System.out.println("changePwd");
 		service.editPwd(m);
-		System.out.println("changePwd2");
 		return "redirect:/member/login";
 	}
 }

@@ -1,6 +1,6 @@
 package com.example.with.review;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Review {
 	private int review_num;

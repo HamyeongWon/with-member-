@@ -96,8 +96,8 @@
 						<textarea style="width: 100%; resize: none" rows="3"
 							placeholder="후기를 남겨주세요." id="content" name="content"></textarea>
 					</p>
-					<input type="hidden" id="star" value="0"> <input
-						type="hidden" id="id" value="${m.id }">
+					<input type="hidden" id="star" name="star" value="0"> <input
+						type="hidden" id="id" name="id" value="${m.id }">
 					<div style="text-align: right">
 						<button type="submit" class="btn btn-dark">등록</button>
 					</div>
@@ -111,7 +111,7 @@
 					<c:forEach items="${list }" var="r">
 						<div class="card border-top border-bottom" style="width: 100%;">
 							<div class="card-body">
-								<h6 class="card-subtitle mb-2 text-muted">${r.member_id}|
+								<h6 class="card-subtitle mb-2 text-muted">${r.member_id} |
 									${r.review_date }</h6>
 								<h5 class="card-title">
 									<c:forEach begin="1" end="5" varStatus="status">
@@ -141,6 +141,8 @@
 			</c:choose>
 		</div>
 	</div>
+	<div class="" style="height: 5%">
 	<c:import url="../footer.jsp" />
+	</div>
 </body>
 </html>
