@@ -11,6 +11,8 @@
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -25,31 +27,119 @@
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 	crossorigin="anonymous"></script>
 </head>
+<script>
+	function starCheck() {
+		if ($("#star").val() <= 0) {
+			alert("별점을 입력해주세요.")
+			return false;
+		} else if ($("#content").val() == null
+				|| $("#content").val().trim() == "") {
+			alert($("#content").val());
+			alert("내용을 입력해주세요.")
+			return false;
+		}
+	}
+
+	$(document).ready(function() {
+		var list = $('.sStar i');
+		list.click(function() {
+			var itemIndex = $(this).index();
+			$("#star").val(itemIndex + 1);
+			for (i = 4; i >= 0; i--) {
+				if (itemIndex >= i) {
+					$('.sStar i').eq(i).removeClass("bi-star");
+					$('.sStar i').eq(i).addClass("bi-star-fill");
+				} else {
+					$('.sStar i').eq(i).addClass("bi-star");
+					$('.sStar i').eq(i).removeClass("bi-star-fill");
+				}
+			}
+		});
+	});
+</script>
+<style>
+.sStar {
+	cursor: pointer
+}
+
+.iStar {
+	color: black;
+}
+</style>
 <body>
 	<c:import url="../header.jsp" />
-	<div class="mt-3 mb-3">
-		후기
+	<div class="mt-3 mb-3 mx-3">
+		${m.nick }님의 후기
+		<c:if test="${sessionScope.id != m.id}">
+			<div class="mb-2" style="text-align: right">
+				<button type="button" data-toggle="collapse"
+					data-target="#writeReview" class="btn btn-dark">후기 작성</button>
+			</div>
+		</c:if>
 
-		<c:choose>
-			<c:when test="${not empty list }">
-				<c:forEach items="${list }" var="r">
-					<div class="card border-top border-bottom" style="width: 100%;">
+		<!-- toggle -->
+		<div id="writeReview"
+			class="collapse mb-1 card border-top border-bottom"
+			style="width: 100%;">
+			<form action="${pageContext.request.contextPath }/review/addReview"
+				onsubmit="return starCheck()" method="post">
+				<div class="card-body">
+					<h6 class="card-subtitle mb-2 text-muted">${sessionScope.id }</h6>
+					<h5 class="card-title">
+						<span class="sStar"> <c:forEach begin="1" end="5"
+								varStatus="status">
+								<i class="fas bi bi-star iStar" style="font-size: 30px"></i>
+							</c:forEach>
+						</span>
+					</h5>
+					<p class="card-text">
+						<textarea style="width: 100%; resize: none" rows="3"
+							placeholder="후기를 남겨주세요." id="content" name="content"></textarea>
+					</p>
+					<input type="hidden" id="star" value="0"> <input
+						type="hidden" id="id" value="${m.id }">
+					<div style="text-align: right">
+						<button type="submit" class="btn btn-dark">등록</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- toggle -->
+		<div id="reList">
+			<c:choose>
+				<c:when test="${not empty list }">
+					<c:forEach items="${list }" var="r">
+						<div class="card border-top border-bottom" style="width: 100%;">
+							<div class="card-body">
+								<h6 class="card-subtitle mb-2 text-muted">${r.member_id}|
+									${r.review_date }</h6>
+								<h5 class="card-title">
+									<c:forEach begin="1" end="5" varStatus="status">
+										<c:choose>
+											<c:when test="${r.star >= status.index}">
+												<i class="fas bi bi-star-fill" style="font-size: 30px"></i>
+											</c:when>
+											<c:otherwise>
+												<i class="fas bi bi-star" style="font-size: 30px"></i>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</h5>
+								<p class="card-text">${r.review_content }</p>
+							</div>
+						</div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<div class="card border-top border-bottom text-center"
+						style="width: 100%;">
 						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
-							<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-							<p class="card-text">Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p>
-							<a href="#" class="card-link">Card link</a> <a href="#"
-								class="card-link">Another link</a>
+							<h5 class="card-title">등록된 후기가 없습니다.</h5>
 						</div>
 					</div>
-				</c:forEach>
-			</c:when>
-			<c:otherwise>
-				후기가 없습니다.
-				<button type="button" class="btn btn-dark">후기 작성</button>
-			</c:otherwise>
-		</c:choose>
+				</c:otherwise>
+			</c:choose>
+		</div>
 	</div>
 	<c:import url="../footer.jsp" />
 </body>

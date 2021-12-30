@@ -7,6 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ReviewMapper {
 	void insert(Review r);
-	ArrayList<Review> selectAll();
+	ArrayList<Review> selectById(String id);
 	void delete(int review_num);
 }

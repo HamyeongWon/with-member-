@@ -6,6 +6,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
 	function join() {
 		location.href = "${pageContext.request.contextPath }/member/join";
@@ -22,7 +23,31 @@
 	function logout() {
 		location.href = "${pageContext.request.contextPath }/member/logout";
 	}
+	$(document).ready(function() {
+
+		$.ajax({
+			url : '/category/getCategory',
+			type : 'get',
+			data : {
+				category_type: 1,
+				parent_category_num: 0
+			},
+			success : function(data) {
+				var list = $.parseJSON(data);
+				var html = "<ul class='nav'>";
+				for(i = 0 ; i < list.length ; i++) {
+					html += "<li class='nav-item' style='float: left'><a href='${pageContext.request.contextPath}/product/search?q=c1&value=" + list[i].category_num + "' class='nav-link px-2 link-secondary'>" +  list[i].category_name + "</a>";
+					html += "</li>";
+				}
+				html += "</ul>";
+				$("#cList").html(html);
+			}
+		});
+	});
 </script>
+<style>
+li { list-style-type: none}
+</style>
 </head>
 <body>
 	<div class="px-2">
@@ -34,13 +59,8 @@
 					<b>With</b>
 				</h2>
 			</a>
-			<ul class="nav col-md-7 col-md-auto justify-content-center mb-md-0">
-				<li><a href="#" class="nav-link px-2 link-secondary">전자기기</a></li>
-				<li><a href="#" class="nav-link px-2 link-dark">의류</a></li>
-				<li><a href="#" class="nav-link px-2 link-dark">책</a></li>
-				<!-- <li><a href="#" class="nav-link px-2 link-dark">카테4</a></li>
-				<li><a href="#" class="nav-link px-2 link-dark">카테5</a></li> -->
-			</ul>
+			<div id="cList">
+			</div>
 			<div class="col-md-3 text-end">
 				<c:choose>
 					<c:when test="${empty sessionScope.id }">

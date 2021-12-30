@@ -24,100 +24,124 @@
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 	crossorigin="anonymous"></script>
 <script>
-var cId = false;
-var cPwd = false;
-var cNick = false;
-var	cTel = false;
+	var cId = false;
+	var cPwd = false;
+	var cNick = false;
+	var cTel = false;
 
-function allCheck() {
-	if(cId && cPwd && cNick && cTel) {
-		return true;
-	} else {
-		alert("양식에 맞게 입력해주세요.")
-		return false;
+	function allCheck() {
+		if (cId && cPwd && cNick && cTel) {
+			return true;
+		} else {
+			alert("양식에 맞게 입력해주세요.")
+			return false;
+		}
 	}
-}
 
-	$(document).ready(function() {		
-		$("#id").change(function() {
-			var value = $(this).val();
-			var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-			if(!regExp.test(value)) {
-				$("#id").addClass("is-invalid");
-				$("#id").removeClass("is-valid");
-				cId = false;
-			} else {
-				$("#id").removeClass("is-invalid");
-				
-				$.ajax({
-					url: '/member/idCheck',
-					type: 'post',
-					data: {id: value},
-					success: function(data) {
-						if(data == 1) {
-							$("#id").addClass("is-valid");
-							$("#id").removeClass("is-invalid");
-							cId = true;
-						} else {
-							$("#id").addClass("is-invalid");
-							$("#id").removeClass("is-valid");
-							cId = false;
-						}
-					}
-				});				
-			}			
-		});
-		
-		$("#pwd, #pwd2").change(function() {
-			var p1 = $("#pwd").val();
-			var p2 = $("#pwd2").val();
-			
-			if (p1 != p2) {
-				$("#pwd1").addClass("is-invalid");
-				$("#pwd2").addClass("is-invalid");
-				$("#pwd2").focus();
-				cPwd = false;
-			} else {
-				$("#pwd1").removeClass("is-invalid");
-				$("#pwd2").removeClass("is-invalid");
-				cPwd = true;
-			}
-		});
-		
-		$("#tel").change(function() {
-			var value = $(this).val();
-			var regExp = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
-			
-			if(!regExp.test(value)) {
-				$("#tel").addClass("is-invalid");
-				cTel = false;
-			} else {
-				$("#tel").removeClass("is-invalid");
-				cTel = true;
-			}
-		});
-		
-		$("#nick").change(function() {
-			var nickName = $(this).val();
-			
-			$.ajax({
-				url: '/member/nickCheck',
-				type: 'post',
-				data: {nick: nickName},
-				success: function(data) {
-					if(data == 0) {
-						$("#nick").addClass("is-valid");
-						$("#nick").removeClass("is-invalid");
-						cNick = true;
-					} else {
-						$("#nick").addClass("is-invalid");
-						$("#nick").removeClass("is-valid");
-						cTel = false;
-					}
-				}
-			});	
-		});
-	});
+	$(document)
+			.ready(
+					function() {
+						$("#id")
+								.change(
+										function() {
+											var value = $(this).val();
+											var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+											if (!regExp.test(value)) {
+												$("#id").addClass("is-invalid");
+												$("#id")
+														.removeClass("is-valid");
+												cId = false;
+											} else {
+												$("#id").removeClass(
+														"is-invalid");
+
+												$
+														.ajax({
+															url : '/member/idCheck',
+															type : 'post',
+															data : {
+																id : value
+															},
+															success : function(
+																	data) {
+																if (data == 1) {
+																	$("#id")
+																			.addClass(
+																					"is-valid");
+																	$("#id")
+																			.removeClass(
+																					"is-invalid");
+																	cId = true;
+																} else {
+																	$("#id")
+																			.addClass(
+																					"is-invalid");
+																	$("#id")
+																			.removeClass(
+																					"is-valid");
+																	cId = false;
+																}
+															}
+														});
+											}
+										});
+
+						$("#pwd, #pwd2").change(function() {
+							var p1 = $("#pwd").val();
+							var p2 = $("#pwd2").val();
+
+							if (p1 != p2) {
+								$("#pwd1").addClass("is-invalid");
+								$("#pwd2").addClass("is-invalid");
+								$("#pwd2").focus();
+								cPwd = false;
+							} else {
+								$("#pwd1").removeClass("is-invalid");
+								$("#pwd2").removeClass("is-invalid");
+								cPwd = true;
+							}
+						});
+
+						$("#tel")
+								.change(
+										function() {
+											var value = $(this).val();
+											var regExp = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
+
+											if (!regExp.test(value)) {
+												$("#tel")
+														.addClass("is-invalid");
+												cTel = false;
+											} else {
+												$("#tel").removeClass(
+														"is-invalid");
+												cTel = true;
+											}
+										});
+
+						$("#nick").change(function() {
+							var nickName = $(this).val();
+
+							$.ajax({
+								url : '/member/nickCheck',
+								type : 'post',
+								data : {
+									nick : nickName
+								},
+								success : function(data) {
+									if (data == 0) {
+										$("#nick").addClass("is-valid");
+										$("#nick").removeClass("is-invalid");
+										cNick = true;
+									} else {
+										$("#nick").addClass("is-invalid");
+										$("#nick").removeClass("is-valid");
+										cTel = false;
+									}
+								}
+							});
+						});
+					});
 </script>
 </head>
 <body>
@@ -182,7 +206,12 @@ function allCheck() {
 					<option value="세종">세종</option>
 				</select>
 			</div>
-			<input type="hidden" id="type" name="type" value="1">
+			<div class="mb-3">
+				<div>
+					<input type="radio" name="type" value="2"> 관리자 <input
+						type="radio" name="type" value="1" checked> 사용자
+				</div>
+			</div>
 			<div class="col-md-12 mb-3">
 				<button type="submit" id="joinBtn" class="btn btn-dark">회원
 					가입</button>

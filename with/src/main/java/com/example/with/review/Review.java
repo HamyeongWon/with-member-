@@ -10,6 +10,10 @@ public class Review {
 	private String review_content;
 	private Date review_date;
 
+	public Review() {
+		super();
+	}
+
 	public Review(int review_num, String member_id, String product_id, int star, String review_content,
 			Date review_date) {
 		super();

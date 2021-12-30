@@ -27,8 +27,13 @@
 	crossorigin="anonymous"></script>
 <title>Insert title here</title>
 <style>
-html, body { height: 100% }
-body { padding-bottom: 9% }
+html, body {
+	height: 100%
+}
+
+body {
+	padding-bottom: 9%
+}
 </style>
 </head>
 <body>
@@ -69,7 +74,6 @@ body { padding-bottom: 9% }
 			<c:otherwise>
 				등록된 상품이 없습니다.
 				<a href="#">첫 상품 등록하기</a>
-
 			</c:otherwise>
 		</c:choose>
 	</div>

@@ -39,7 +39,7 @@
 	}
 	
 	function goPwdChange() {
-		location.href="";
+		location.href="${pageContext.request.contextPath }/member/changePwd?id=${sessionScope.id}";
 	}
 </script>
 <body>

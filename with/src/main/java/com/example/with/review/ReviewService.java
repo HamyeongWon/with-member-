@@ -14,8 +14,8 @@ public class ReviewService {
 		mapper.insert(r);
 	}
 	
-	public ArrayList<Review> getAllList() {
-		return mapper.selectAll();
+	public ArrayList<Review> getAllList(String id) {
+		return mapper.selectById(id);
 	}
 	
 	public void delReview(int review_num) {

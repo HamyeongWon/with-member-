@@ -1,5 +1,7 @@
 package com.example.with.member;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,16 +15,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.with.category.Category;
+import com.example.with.category.CategoryService;
+
 @Controller
 public class MemberController {
 	@Autowired
 	private MemberService service;
+
+	@Autowired
+	private CategoryService cService;
 
 	@RequestMapping("/")
 	public ModelAndView main() {
 		ModelAndView m = new ModelAndView("index");
 //		ArrayList<Product> list = productService.getList();
 //		m.addObject("list", list);
+
 		return m;
 	}
 
@@ -56,6 +65,7 @@ public class MemberController {
 		Member m = service.getMember(id);
 		if (m != null && m.getPwd().equals(pwd)) {
 			session.setAttribute("id", id);
+			session.setAttribute("nick", m.getNick());
 		} else {
 			System.out.println("login fail");
 		}
@@ -70,7 +80,7 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/member/main";
 	}
-	
+
 	@RequestMapping("/member/del")
 	public String delMember(@RequestParam("id") String id) {
 		service.delMember(id);
@@ -120,15 +130,18 @@ public class MemberController {
 		return "redirect:/member/myPage";
 	}
 
-	@GetMapping("/member/myPage")
-	public String myPage() {
-		return "member/main";
+	@RequestMapping("/member/myPage")
+	public ModelAndView myPage(String id) {
+		ModelAndView mv = new ModelAndView("member/main");
+		Member m = service.getMember(id);
+		mv.addObject("m", m);
+		return mv;
 	}
-	
+
 	@RequestMapping(value = "/member/passwordChk")
 	public void pwdChk() {
 	}
-	
+
 	@PostMapping(value = "/member/pwdChk")
 	@ResponseBody
 	public JSONObject pwdChk(HttpServletRequest req, @RequestParam("pwd") String pwd) {
@@ -144,7 +157,7 @@ public class MemberController {
 		}
 		return jo;
 	}
-	
+
 	@GetMapping(value = "/member/findPwd")
 	public String findp(HttpServletRequest req) {
 		HttpSession session = req.getSession(false);
@@ -155,12 +168,12 @@ public class MemberController {
 			return req.getRequestURI();
 		}
 	}
-	
+
 	@PostMapping(value = "/member/findPwd")
 	public ModelAndView findPwd(String id) {
 		ModelAndView mav = new ModelAndView();
 		Member m = service.getMember(id);
-		
+
 		if (m == null) {
 			mav.setViewName("/member/findPwd");
 			mav.addObject("error", "아이디(이메일)를 확인해주세요..");
@@ -171,10 +184,10 @@ public class MemberController {
 			mav.setViewName("/member/findPwd");
 			mav.addObject("error", "입력값을 확인해주세요.");
 		}
-		
+
 		return mav;
 	}
-	
+
 	@GetMapping(value = "/member/changePwd")
 	public void changePwdPage() {
 	}
